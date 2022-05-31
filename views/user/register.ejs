@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/main.css">
+    <title>register</title>
+</head>
+
+<body>
+    <% if (messages.error) { %>
+        <p>
+            <%= messages.error %>
+        </p>
+        <% } %>
+            <form action="/user/register" method="POST">
+                <h2>register</h2>
+                <section>
+                    <label for="email">email</label>
+                    <input type="email" name="email" id="email" value="<%= typeof email != 'undefined' ? email : '' %>"
+                        required />
+                </section>
+                <section>
+                    <label for="password">password</label>
+                    <input type="password" name="password" id="password"
+                        value="<%= typeof password != 'undefined' ? password : '' %>" required />
+                </section>
+                <section>
+                    <label for="passwordRepeat">repeat password</label>
+                    <input type="password" name="passwordRepeat" id="passwordRepeat"
+                        value="<%= typeof passwordRepeat != 'undefined' ? passwordRepeat : '' %>" required />
+                </section>
+                <section>
+                    <input type="submit" value="create account" />
+                </section>
+            </form>
+</body>
+
+</html>
