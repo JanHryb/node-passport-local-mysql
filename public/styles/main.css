@@ -3,6 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  word-wrap: break-word;
 }
 
 html,
@@ -59,11 +60,11 @@ body {
 }
 
 .nav .menu-item {
-  margin: 0 1.5em 0 0;
+  margin: 0 2em 0 0;
 }
 
 .nav .menu-item a {
-  text-transform: capitalize;
+  width: 100%;
   font-size: 1.08em;
   text-decoration: none;
   color: #1a1a1a;
@@ -92,17 +93,21 @@ body {
   opacity: 0;
   position: absolute;
   transition: all 0.5s ease;
-  left: 0;
+  left: -28px;
   display: none;
   list-style: none;
 }
 
 .nav .menu-item-logged .dropdown-menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   clear: both;
-  width: 100%;
 }
 
 .nav .menu-item-logged .dropdown-menu-item a {
+  white-space: nowrap;
   color: white;
 }
 
@@ -124,6 +129,13 @@ body {
 
 .nav .menu-item-logged:hover {
   transform: translateY(0px);
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer {

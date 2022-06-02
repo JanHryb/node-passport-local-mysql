@@ -1,0 +1,66 @@
+.main {
+  height: calc(100% - 120px);
+}
+.form {
+  padding: 2em;
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  .form-title {
+    text-align: center;
+    color: #6658d3;
+    width: 100%;
+  }
+  .form-wrapper {
+    width: 100%;
+    margin-top: 1.5em;
+  }
+  .form-wrapper::first-letter {
+    text-transform: uppercase;
+  }
+  .form-label {
+    font-size: 0.95em;
+    color: #6658d3;
+  }
+  .form-input {
+    font-size: 1.05em;
+    padding-top: 0.15em;
+    padding-bottom: 0.15em;
+    border: none;
+    border-bottom: 2px solid #6658d3;
+    outline: none;
+    width: 300px;
+  }
+  .form-button {
+    font-size: 1.05em;
+    width: 300px;
+    border: none;
+    padding: 1.25em 1.25em;
+    border-radius: 5px;
+    background-color: #6658d3;
+    color: white;
+  }
+  .form-button:hover {
+    cursor: pointer;
+  }
+  .form-link {
+    margin-top: 0.5em;
+    color: #6658d3;
+    a {
+      color: #6658d3;
+    }
+  }
+  .form-message-error {
+    font-size: 0.9em;
+    color: red;
+    width: 100%;
+  }
+  .form-message-success {
+    font-size: 0.9em;
+    color: rgb(2, 155, 2);
+    width: 100%;
+  }
+}

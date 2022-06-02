@@ -6,46 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/main.css">
+    <link rel="stylesheet" href="../public/styles/form.css">
     <title>register</title>
 </head>
 
 <body>
     <div class="container">
         <%- include('../partials/navbar') %>
-            <% if (messages.error) { %>
-                <p>
-                    <%= messages.error %>
-                </p>
-                <% } %>
-                    <form action="/user/register" method="POST">
-                        <h2>register</h2>
-                        <section>
-                            <label for="firstName">first name</label>
-                            <input type="text" name="firstName" id="firstName">
+            <main class="main">
+                <form action="/user/register" method="POST" class="form">
+                    <h2 class="form-title">REGISTER</h2>
+
+                    <% if (messages.error) { %>
+                        <section class="form-wrapper">
+                            <p class="form-message-error">
+                                <%= messages.error %>
+                            </p>
                         </section>
-                        <section>
-                            <label for="lastName">last name</label>
-                            <input type="text" name="lastName" id="lastName">
-                        </section>
-                        <section>
-                            <label for="email">email</label>
-                            <input type="email" name="email" id="email"
-                                value="<%= typeof email != 'undefined' ? email : '' %>" required />
-                        </section>
-                        <section>
-                            <label for="password">password</label>
-                            <input type="password" name="password" id="password"
-                                value="<%= typeof password != 'undefined' ? password : '' %>" required />
-                        </section>
-                        <section>
-                            <label for="passwordRepeat">repeat password</label>
-                            <input type="password" name="passwordRepeat" id="passwordRepeat"
-                                value="<%= typeof passwordRepeat != 'undefined' ? passwordRepeat : '' %>" required />
-                        </section>
-                        <section>
-                            <input type="submit" value="create account" />
-                        </section>
-                    </form>
+                        <% } %>
+                            <section class="form-wrapper">
+                                <label for="firstName" class="form-label">first name</label>
+                                <input type="text" name="firstName" id="firstName" required class="form-input">
+                            </section>
+                            <section class="form-wrapper">
+                                <label for="lastName" class="form-label">last name</label>
+                                <input type="text" name="lastName" id="lastName" required class="form-input">
+                            </section>
+                            <section class="form-wrapper">
+                                <label for="email" class="form-label">email</label>
+                                <input type="email" name="email" id="email" required class="form-input" />
+                            </section>
+                            <section class="form-wrapper">
+                                <label for="password" class="form-label">password</label>
+                                <input type="password" name="password" id="password" required class="form-input" />
+                            </section>
+                            <section class="form-wrapper">
+                                <label for="passwordRepeat" class="form-label">repeat password</label>
+                                <input type="password" name="passwordRepeat" id="passwordRepeat" required
+                                    class="form-input" />
+                            </section>
+                            <section class="form-wrapper">
+                                <button type="submit" class="form-button">Create account</button>
+                            </section>
+                            <p class="form-link">Already have an account? <a href="/user/login">login</a></p>
+                </form>
+            </main>
+
     </div>
     <%- include('../partials/footer') %>
         <script src="https://kit.fontawesome.com/f2431a56cd.js" crossorigin="anonymous"></script>
