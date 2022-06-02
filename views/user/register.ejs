@@ -10,32 +10,45 @@
 </head>
 
 <body>
-    <% if (messages.error) { %>
-        <p>
-            <%= messages.error %>
-        </p>
-        <% } %>
-            <form action="/user/register" method="POST">
-                <h2>register</h2>
-                <section>
-                    <label for="email">email</label>
-                    <input type="email" name="email" id="email" value="<%= typeof email != 'undefined' ? email : '' %>"
-                        required />
-                </section>
-                <section>
-                    <label for="password">password</label>
-                    <input type="password" name="password" id="password"
-                        value="<%= typeof password != 'undefined' ? password : '' %>" required />
-                </section>
-                <section>
-                    <label for="passwordRepeat">repeat password</label>
-                    <input type="password" name="passwordRepeat" id="passwordRepeat"
-                        value="<%= typeof passwordRepeat != 'undefined' ? passwordRepeat : '' %>" required />
-                </section>
-                <section>
-                    <input type="submit" value="create account" />
-                </section>
-            </form>
+    <div class="container">
+        <%- include('../partials/navbar') %>
+            <% if (messages.error) { %>
+                <p>
+                    <%= messages.error %>
+                </p>
+                <% } %>
+                    <form action="/user/register" method="POST">
+                        <h2>register</h2>
+                        <section>
+                            <label for="firstName">first name</label>
+                            <input type="text" name="firstName" id="firstName">
+                        </section>
+                        <section>
+                            <label for="lastName">last name</label>
+                            <input type="text" name="lastName" id="lastName">
+                        </section>
+                        <section>
+                            <label for="email">email</label>
+                            <input type="email" name="email" id="email"
+                                value="<%= typeof email != 'undefined' ? email : '' %>" required />
+                        </section>
+                        <section>
+                            <label for="password">password</label>
+                            <input type="password" name="password" id="password"
+                                value="<%= typeof password != 'undefined' ? password : '' %>" required />
+                        </section>
+                        <section>
+                            <label for="passwordRepeat">repeat password</label>
+                            <input type="password" name="passwordRepeat" id="passwordRepeat"
+                                value="<%= typeof passwordRepeat != 'undefined' ? passwordRepeat : '' %>" required />
+                        </section>
+                        <section>
+                            <input type="submit" value="create account" />
+                        </section>
+                    </form>
+    </div>
+    <%- include('../partials/footer') %>
+        <script src="https://kit.fontawesome.com/f2431a56cd.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

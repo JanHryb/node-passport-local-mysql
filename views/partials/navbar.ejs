@@ -1,0 +1,20 @@
+<nav class="nav">
+    <section class="logo">
+        <a href="/"><i class="fa fa-warehouse"></i></a>
+    </section>
+    <ul class="menu">
+        <li class="menu-item"><a href="/">home</a></li>
+        <li class="menu-item"><a href="/dashboard">dashboard</a></li>
+        <% if(messages.loggedIn){ %>
+            <li class="menu-item menu-item-logged">
+                <a href="/user"><i class="fa fa-user"></i></a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-menu-item"><a href="/user">profile</a></li>
+                    <li class="dropdown-menu-item"><a href="/user/logout">logout</a></li>
+                </ul>
+            </li>
+            <% } else{ %>
+                <li class="menu-item"><a href="/user/login">login</a></li>
+                <% } %>
+    </ul>
+</nav>

@@ -31,6 +31,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.authenticate("session"));
 require("./config/passport").initialize();
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    req.flash("loggedIn", "true");
+  }
+  return next();
+});
 
 // routes
 app.use("/", require("./routes/index"));

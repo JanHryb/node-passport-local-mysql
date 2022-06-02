@@ -3,12 +3,21 @@ const database = require("../config/database").connect();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const auth = require("../config/auth");
-const { append } = require("express/lib/response");
 
 const router = express.Router();
 
 router.get("/", auth.isAuthenticated, (req, res) => {
-  return res.status(200).render("user/user");
+  database.query(
+    `SELECT * FROM users WHERE user_id = '${req.user}';`,
+    (err, result) => {
+      if (err) {
+        console.error(err);
+      }
+
+      const user = result[0];
+      return res.status(200).render("user/user", { user });
+    }
+  );
 });
 
 router.get("/register", auth.alreadyAuthenticated, (req, res) => {
@@ -30,7 +39,7 @@ router.get("/logout", (req, res, next) => {
 });
 
 router.post("/register", (req, res) => {
-  const { email, password, passwordRepeat } = req.body;
+  const { firstName, lastName, email, password, passwordRepeat } = req.body;
   database.query(
     `SELECT * FROM users WHERE user_email = '${email}';`,
     (err, result) => {
@@ -43,7 +52,15 @@ router.post("/register", (req, res) => {
         req.flash("error", "user with that email already exist");
         return res.status(400).redirect("/user/register");
       }
-      if (!(email && password && passwordRepeat)) {
+      if (!(firstName && lastName && email && password && passwordRepeat)) {
+        return res.status(400).redirect("/user/register");
+      }
+      if (firstName.length < 2) {
+        req.flash("error", "first name should contain at least 2 characters");
+        return res.status(400).redirect("/user/register");
+      }
+      if (lastName.length < 2) {
+        req.flash("error", "last name should contain at least 2 characters");
         return res.status(400).redirect("/user/register");
       }
       if (password.length < 6) {
@@ -59,7 +76,7 @@ router.post("/register", (req, res) => {
           console.error(err);
         }
         database.query(
-          `INSERT INTO users(user_email, user_password) VALUES ('${email}', '${hash}');`,
+          `INSERT INTO users(user_first_name, user_last_name, user_email, user_password) VALUES ('${firstName}', '${lastName}', '${email}', '${hash}');`,
           (err) => {
             if (err) {
               console.error(err);

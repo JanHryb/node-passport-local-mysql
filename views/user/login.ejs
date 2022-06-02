@@ -10,29 +10,33 @@
 </head>
 
 <body>
-
-    <% if (messages.error) { %>
-        <p>
-            <%= messages.error %>
-        </p>
-        <% } %>
-            <% if (messages.success) { %>
+    <div class="container">
+        <%- include('../partials/navbar') %>
+            <% if (messages.error) { %>
                 <p>
-                    <%= messages.success %>
+                    <%= messages.error %>
                 </p>
                 <% } %>
-                    <form action="/user/login" method="POST">
-                        <h2>login</h2>
-                        <section>
-                            <label for="email">email</label>
-                            <input type="email" name="email" id="email" required />
-                        </section>
-                        <section>
-                            <label for="password">password</label>
-                            <input type="password" name="password" id="password" required />
-                        </section>
-                        <section><input type="submit" value="login" /></section>
-                    </form>
+                    <% if (messages.success) { %>
+                        <p>
+                            <%= messages.success %>
+                        </p>
+                        <% } %>
+                            <form action="/user/login" method="POST">
+                                <h2>login</h2>
+                                <section>
+                                    <label for="email">email</label>
+                                    <input type="email" name="email" id="email" required />
+                                </section>
+                                <section>
+                                    <label for="password">password</label>
+                                    <input type="password" name="password" id="password" required />
+                                </section>
+                                <section><input type="submit" value="login" /></section>
+                            </form>
+    </div>
+    <%- include('../partials/footer') %>
+        <script src="https://kit.fontawesome.com/f2431a56cd.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

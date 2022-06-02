@@ -5,7 +5,134 @@
   padding: 0;
 }
 
+html,
 body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
   font-family: "Roboto", sans-serif;
+}
+
+.container {
+  flex: 1 0 auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: 65px;
+  padding: 0 6em 0 6em;
+  position: sticky;
+  top: 0;
+  z-index: 2147483647;
+  box-shadow: 0 0 8px 0 #cccccc;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.nav .logo {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.nav .logo a {
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+.nav .logo a i {
+  color: #1a1a1a;
+  font-size: 1.5em;
+}
+
+.nav .menu {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 50%;
+  list-style: none;
+}
+
+.nav .menu-item {
+  margin: 0 1.5em 0 0;
+}
+
+.nav .menu-item a {
+  text-transform: capitalize;
+  font-size: 1.08em;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+.nav .menu-item:last-child {
+  margin: 0 0 0 0;
+}
+
+.nav .menu-item:hover {
+  transition: all 0.2s;
+  transform: translateY(-2px);
+}
+
+.nav .menu-item-logged a i {
+  font-size: 1.08em;
+}
+
+.nav .menu-item-logged .dropdown-menu {
+  background-color: #1a1a1a;
+  border-radius: 5px;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: all 0.5s ease;
+  left: 0;
+  display: none;
+  list-style: none;
+}
+
+.nav .menu-item-logged .dropdown-menu-item {
+  clear: both;
+  width: 100%;
+}
+
+.nav .menu-item-logged .dropdown-menu-item a {
+  color: white;
+}
+
+.nav .menu-item-logged .dropdown-menu-item:last-child {
+  margin-top: 0.5em;
+}
+
+.nav .menu-item-logged .dropdown-menu-item:hover {
+  transition: all 0.2s;
+  transform: translateY(-2px);
+}
+
+.nav .menu-item-logged:hover > .dropdown-menu,
+.nav .dropdown-menu:focus-within {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+.nav .menu-item-logged:hover {
+  transform: translateY(0px);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  height: 55px;
+  color: #ffffff;
+  background-color: #1a1a1a;
 }
 /*# sourceMappingURL=main.css.map */

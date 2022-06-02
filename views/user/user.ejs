@@ -10,7 +10,15 @@
 </head>
 
 <body>
-    <h1>user</h1>
+    <div class="container">
+        <%- include('../partials/navbar') %>
+            <% if(user){ %>
+                <h1>hi, <%= user.user_first_name %>
+                </h1>
+                <% } %>
+    </div>
+    <%- include('../partials/footer') %>
+        <script src="https://kit.fontawesome.com/f2431a56cd.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
