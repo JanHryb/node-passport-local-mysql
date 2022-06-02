@@ -41,6 +41,7 @@ app.use((req, res, next) => {
 // routes
 app.use("/", require("./routes/index"));
 app.use("/user", require("./routes/user"));
+app.use("/dashboard", require("./routes/dashboard"));
 
 app.get("*", (req, res) => {
   return res.status(404).render("notFound");
