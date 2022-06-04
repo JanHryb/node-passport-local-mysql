@@ -53,6 +53,24 @@
       color: #6658d3;
     }
   }
+  .form-wrapper-checkbox {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+  .form-input-checkbox {
+    accent-color: #6658d3;
+    width: 16px;
+    height: 16px;
+    margin-right: 1em;
+  }
+  .form-label-checkbox {
+    user-select: none;
+  }
+  .form-input-checkbox:hover,
+  .form-label-checkbox:hover {
+    cursor: pointer;
+  }
   .form-message-error {
     font-size: 0.9em;
     color: red;

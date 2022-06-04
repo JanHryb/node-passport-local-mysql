@@ -4,6 +4,7 @@ const path = require("path");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
+const req = require("express/lib/request");
 const mySqlStore = require("express-mysql-session")(session);
 
 const app = express();
@@ -17,20 +18,21 @@ app.use(flash());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
     store: new mySqlStore({
       host: "localhost",
       user: "root",
       password: "",
       database: "warehouse",
       clearExpired: true,
+      checkExpirationInterval: 1000 * 60 * 60 * 24,
     }),
+    resave: false,
+    saveUninitialized: false,
   })
 );
 app.use(passport.initialize());
 app.use(passport.authenticate("session"));
-require("./config/passport").initialize();
+require("./config/passport");
 app.use((req, res, next) => {
   if (req.isAuthenticated()) {
     req.flash("loggedIn", "true");
