@@ -138,6 +138,8 @@ body {
 }
 
 .main {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
   display: flex;
   justify-content: center;
   align-items: center;

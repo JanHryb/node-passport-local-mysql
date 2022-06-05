@@ -101,7 +101,7 @@ router.post(
     if (req.body.rememberMe) {
       req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 7; // cookie expires after 7 days
     } else {
-      req.session.cookie.maxAge = false; // cookie expires at end of session
+      req.session.cookie.maxAge = null; // cookie expires at end of session
     }
     return res.redirect("/user");
   }
