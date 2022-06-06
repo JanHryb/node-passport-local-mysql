@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/main.css">
+    <link rel="stylesheet" href="../public/styles/dashboard.css">
     <title>dashboard</title>
 </head>
 
@@ -13,7 +14,13 @@
     <div class="container">
         <%- include('../partials/navbar') %>
             <main class="main">
-                <h1>Warehouse dashboard</h1>
+                <h1 class="page-title">Warehouse dashboard</h1>
+                <ul class="table-menu">
+                    <li class="table-menu-item"><a href="#">orders</a></li>
+                    <li class="table-menu-item"><a href="/dashboard/products">products</a></li>
+                    <li class="table-menu-item"><a href="#">product categories</a></li>
+                    <li class="table-menu-item"><a href="#">product brands</a></li>
+                </ul>
             </main>
     </div>
     <%- include('../partials/footer') %>

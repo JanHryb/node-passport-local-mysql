@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/main.css">
+    <link rel="stylesheet" href="../public/styles/dashboard.css">
+    <title>dashboard products</title>
+</head>
+
+<body>
+    <div class="container">
+        <%- include('../partials/navbar') %>
+            <main class="main">
+                <h1 class="page-title">Products</h1>
+                <section class="add">
+                    <form action="/dashboard/products" method="POST" class="form">
+                        <h2 class="form-title">ADD PRODUCT</h2>
+                        <% if (messages.error) { %>
+                            <section class="form-wrapper">
+                                <p class="form-message-error">
+                                    <%= messages.error %>
+                                </p>
+                            </section>
+                            <% } %>
+                                <% if (messages.success) { %>
+                                    <section class="form-wrapper">
+                                        <p class="form-message-success">
+                                            <%= messages.success %>
+                                        </p>
+                                    </section>
+                                    <% } %>
+                                        <section class="form-wrapper">
+                                            <label for="product_name" class="form-label">product name</label>
+                                            <input type="text" name="product_name" id="product_name" required
+                                                class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="product_desc" class="form-label">product description</label>
+                                            <input type="text" name="product_desc" id="product_desc"
+                                                class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="product_price" class="form-label">product price</label>
+                                            <input type="number" step="0.01" name="product_price" id="product_price"
+                                                required class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="product_amount" class="form-label">product amount</label>
+                                            <input type="number" name="product_amount" id="product_amount" required
+                                                class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <% if(productCategories){ %>
+                                                <select name="product_category_id" id="product_category_id" required
+                                                    class="form-input">
+                                                    <option disabled selected value>product category name</option>
+                                                    <% productCategories.forEach((record)=>{ %>
+                                                        <option value="<%= record.product_category_id %>">
+                                                            <%= record.product_category_name %>
+                                                        </option>
+                                                        <% }) %>
+
+                                                </select>
+                                                <% } %>
+
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <% if(productBrands){ %>
+                                                <select name="product_brand_id" id="product_brand_id" required
+                                                    class="form-input">
+                                                    <option disabled selected value>product brand name</option>
+                                                    <% productBrands.forEach((record)=>{ %>
+                                                        <option value="<%= record.product_brand_id %>">
+                                                            <%= record.product_brand_name %>
+                                                        </option>
+                                                        <% }) %>
+
+                                                </select>
+                                                <% } %>
+
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <button type="submit" class="form-button">add product</button>
+                                        </section>
+                    </form>
+                </section>
+                <section class="view">
+                    <% if(viewResult){ %>
+                        <table class="table">
+                            <tr class="table-row">
+                                <th>product ID</th>
+                                <th>product name</th>
+                                <th>product description</th>
+                                <th>product price</th>
+                                <th>product amount</th>
+                                <th>product category name</th>
+                                <th>product brand name</th>
+                            </tr>
+                            <% viewResult.forEach((record)=>{ %>
+                                <tr class="table-row">
+                                    <td>
+                                        <%= record.product_id %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_name %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_desc %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_price %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_amount %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_category_name %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_brand_name %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </table>
+                        <% } %>
+                </section>
+            </main>
+    </div>
+    <%- include('../partials/footer') %>
+        <script src="https://kit.fontawesome.com/f2431a56cd.js" crossorigin="anonymous"></script>
+        <script src="../public/scripts/navbar.js"></script>
+</body>
+
+</html>

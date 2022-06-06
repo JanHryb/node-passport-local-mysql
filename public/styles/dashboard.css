@@ -1,0 +1,140 @@
+.add {
+  margin-bottom: 1.5em;
+}
+
+.table-menu {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5em;
+  row-gap: 1.5em;
+}
+
+.table-menu .table-menu-item {
+  width: 200px;
+  height: 200px;
+}
+
+.table-menu .table-menu-item a {
+  color: #000000;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.table-menu .table-menu-item a:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.table {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.table .table-row th,
+.table .table-row td {
+  text-align: center;
+  padding: 1em;
+  border: 1px solid black;
+}
+
+.form {
+  padding: 2em;
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.form .form-title {
+  text-align: center;
+  color: #6658d3;
+  width: 100%;
+}
+
+.form .form-wrapper {
+  width: 100%;
+  margin-top: 1.5em;
+}
+
+.form .form-wrapper::first-letter {
+  text-transform: uppercase;
+}
+
+.form .form-label {
+  font-size: 0.95em;
+  color: #6658d3;
+}
+
+.form .form-input {
+  font-size: 1.05em;
+  padding-top: 0.15em;
+  padding-bottom: 0.15em;
+  border: none;
+  border-bottom: 2px solid #6658d3;
+  outline: none;
+  width: 300px;
+}
+
+.form .form-button {
+  font-size: 1.05em;
+  width: 300px;
+  border: none;
+  padding: 1.25em 1.25em;
+  border-radius: 5px;
+  background-color: #6658d3;
+  color: white;
+}
+
+.form .form-button:hover {
+  cursor: pointer;
+}
+
+.form .form-link {
+  margin-top: 0.5em;
+  color: #6658d3;
+}
+
+.form .form-link a {
+  color: #6658d3;
+}
+
+.form .form-wrapper-checkbox {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.form .form-input-checkbox {
+  accent-color: #6658d3;
+  width: 16px;
+  height: 16px;
+  margin-right: 1em;
+}
+
+.form .form-label-checkbox {
+  user-select: none;
+}
+
+.form .form-input-checkbox:hover,
+.form .form-label-checkbox:hover {
+  cursor: pointer;
+}
+
+.form .form-message-error {
+  font-size: 0.9em;
+  color: red;
+  width: 100%;
+}
+
+.form .form-message-success {
+  font-size: 0.9em;
+  color: #029b02;
+  width: 100%;
+}
+/*# sourceMappingURL=dashboard.css.map */
