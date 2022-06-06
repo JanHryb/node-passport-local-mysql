@@ -41,6 +41,8 @@ CREATE TABLE orders (order_id INT AUTO_INCREMENT,
                     product_id INT NOT NULL,
                     order_ordered_amount INT UNSIGNED NOT NULL,
                     order_total_price DECIMAL(9,2) UNSIGNED NOT NULL,
+                    customer_name VARCHAR(50) NOT NULL,
+                    customer_NIP INT(10) NOT NULL,
                     user_id INT NOT NULL,
                     PRIMARY KEY (order_id),
                     FOREIGN KEY (product_id) REFERENCES products(product_id),
@@ -76,6 +78,28 @@ BEGIN
     VALUES (product_name, product_desc, product_price, product_amount, product_category_id, product_brand_id);
 END $$
 # CALL createProduct('adidas forum low', '',350.00,50,1,6);
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE viewOrders()
+BEGIN
+    SELECT orders.order_id, products.product_name, products.product_price, orders.order_ordered_amount, orders.order_total_price, orders.order_date, orders.customer_name, orders.customer_NIP, CONCAT(users.user_first_name, ' ', users.user_last_name) AS 'employee'
+    FROM orders
+    INNER JOIN products ON orders.product_id = products.product_id
+    INNER JOIN users ON orders.user_id = users.user_id
+    ORDER BY orders.order_date DESC;
+END $$
+# CALL viewOrders();
+
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE createOrder(order_date DATE, product_id INT, order_ordered_amount INT UNSIGNED, order_total_price DECIMAL(9,2) UNSIGNED, customer_name VARCHAR(50), customer_NIP INT(10), user_id INT)
+BEGIN
+    START TRANSACTION;
+        INSERT INTO orders(order_date, product_id, order_ordered_amount, order_total_price, customer_name, customer_NIP, user_id)
+        VALUES (order_date, product_id, order_ordered_amount, order_total_price, customer_name, customer_NIP, user_id);
+        UPDATE products SET products.product_amount = products.product_amount - order_ordered_amount WHERE products.product_id = product_id;
+    COMMIT;
+END $$
+# CALL createOrder('2022-05-09', 1, 500, 5000, 'tommy shelby company', 1234567890, 1);
 
 
 

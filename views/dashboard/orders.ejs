@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/main.css">
+    <link rel="stylesheet" href="../public/styles/dashboard.css">
+    <title>dashboard orders</title>
+</head>
+
+<body>
+    <div class="container">
+        <%- include('../partials/navbar') %>
+            <main class="main">
+                <section class="add">
+                    <form action="/dashboard/orders" method="POST" class="form">
+                        <h2 class="form-title">ADD ORDER</h2>
+                        <% if (messages.error) { %>
+                            <section class="form-wrapper">
+                                <p class="form-message-error">
+                                    <%= messages.error %>
+                                </p>
+                            </section>
+                            <% } %>
+                                <% if (messages.success) { %>
+                                    <section class="form-wrapper">
+                                        <p class="form-message-success">
+                                            <%= messages.success %>
+                                        </p>
+                                    </section>
+                                    <% } %>
+                                        <section class="form-wrapper">
+                                            <% if(products){ %>
+                                                <select name="product_id" id="product_id" required class="form-input">
+                                                    <option disabled selected value>product name</option>
+                                                    <% products.forEach((record)=>{ %>
+                                                        <option value="<%= record.product_id %>">
+                                                            <%= record.product_name %>
+                                                        </option>
+                                                        <% }) %>
+
+                                                </select>
+                                                <% } %>
+
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="order_ordered_amount" class="form-label">ordered amount</label>
+                                            <input type="number" name="order_ordered_amount" id="order_ordered_amount"
+                                                required class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="order_date" class="form-label">order date</label>
+                                            <input type="date" name="order_date" id="order_date" required
+                                                class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="customer_name" class="form-label">customer name</label>
+                                            <input type="text" name="customer_name" id="customer_name" required
+                                                class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <label for="customer_NIP" class="form-label">customer NIP</label>
+                                            <input type="text" name="customer_NIP" id="customer_NIP" required
+                                                pattern="[1-9]{1}[0-9]{9}" class="form-input" />
+                                        </section>
+                                        <section class="form-wrapper">
+                                            <button type="submit" class="form-button">add order</button>
+                                        </section>
+                    </form>
+                </section>
+                <section class="view">
+                    <% if(viewResult){ %>
+                        <table class="table">
+                            <tr class="table-row">
+                                <th>order ID</th>
+                                <th>product name</th>
+                                <th>product price</th>
+                                <th>ordered amount</th>
+                                <th>total price</th>
+                                <th>order date</th>
+                                <th>customer name</th>
+                                <th>customer NIP</th>
+                                <th>employee</th>
+                            </tr>
+                            <% viewResult.forEach((record)=>{ %>
+                                <tr class="table-row">
+                                    <td>
+                                        <%= record.order_id %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_name %>
+                                    </td>
+                                    <td>
+                                        <%= record.product_price %>
+                                    </td>
+                                    <td>
+                                        <%= record.order_ordered_amount %>
+                                    </td>
+                                    <td>
+                                        <%= record.order_total_price %>
+                                    </td>
+                                    <td>
+                                        <%= record.order_date.toLocaleDateString() %>
+                                    </td>
+                                    <td>
+                                        <%= record.customer_name %>
+                                    </td>
+                                    <td>
+                                        <%= record.customer_NIP %>
+                                    </td>
+                                    <td>
+                                        <%= record.employee %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </table>
+                        <% } %>
+                </section>
+            </main>
+    </div>
+    <%- include('../partials/footer') %>
+        <script src="https://kit.fontawesome.com/f2431a56cd.js" crossorigin="anonymous"></script>
+        <script src="../public/scripts/navbar.js"></script>
+</body>
+
+</html>

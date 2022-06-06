@@ -8,6 +8,26 @@ router.get("/", auth.isAuthenticated, (req, res) => {
   return res.status(200).render("dashboard/dashboard");
 });
 
+router.get("/orders", auth.isAuthenticated, (req, res) => {
+  database.query(`CALL viewOrders();`, (err, viewResult) => {
+    if (err) {
+      console.error(err);
+    }
+    viewResult = viewResult[0];
+    database.query(
+      `SELECT product_id, product_name FROM products;`,
+      (err, products) => {
+        if (err) {
+          console.error(err);
+        }
+        return res
+          .status(200)
+          .render("dashboard/orders", { viewResult, products });
+      }
+    );
+  });
+});
+
 router.get("/products", auth.isAuthenticated, (req, res) => {
   database.query(`CALL viewProducts();`, (err, viewResult) => {
     if (err) {
@@ -36,6 +56,43 @@ router.get("/products", auth.isAuthenticated, (req, res) => {
       }
     );
   });
+});
+
+router.post("/orders", (req, res) => {
+  const {
+    product_id,
+    order_ordered_amount,
+    order_date,
+    customer_name,
+    customer_NIP,
+  } = req.body;
+
+  // TODO -> input data validation!
+
+  database.query(
+    `SELECT product_price FROM products WHERE product_id = ${product_id};`,
+    (err, result) => {
+      if (err) {
+        console.error(err);
+      }
+      const order_total_price =
+        result[0].product_price * parseInt(order_ordered_amount);
+      database.query(
+        `CALL createOrder('${order_date}', ${parseInt(product_id)}, ${parseInt(
+          order_ordered_amount
+        )}, ${order_total_price}, '${customer_name}', ${parseInt(
+          customer_NIP
+        )}, ${req.user});`,
+        (err, result) => {
+          if (err) {
+            console.error(err);
+          }
+          req.flash("success", "record has been added");
+          return res.status(201).redirect("/dashboard/orders");
+        }
+      );
+    }
+  );
 });
 
 router.post("/products", (req, res) => {
@@ -87,7 +144,7 @@ router.post("/products", (req, res) => {
       if (err) {
         console.error(err);
       }
-      req.flash("success", "one record has been added");
+      req.flash("success", "record has been added");
       return res.status(201).redirect("/dashboard/products");
     }
   );

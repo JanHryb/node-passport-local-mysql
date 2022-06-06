@@ -4,7 +4,6 @@ const path = require("path");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
-const req = require("express/lib/request");
 const mySqlStore = require("express-mysql-session")(session);
 
 const app = express();
