@@ -1,9 +1,3 @@
-/*
-procedury, transakcje, triggery sql projekt
-wyzwalacze
-triggery
-*/
-
 #DATABASE STRUCTURE
 DROP DATABASE IF EXISTS warehouse;
 CREATE DATABASE warehouse;
