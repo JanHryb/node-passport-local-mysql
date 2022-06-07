@@ -8,7 +8,7 @@ To run this project, make following steps :
 $ npm install
 ```
 
-create .env file and following variables: 'PORT' and 'SESSION_SECRET'
+create .env file and variables in it: 'PORT' and 'SESSION_SECRET'
 example:
 
 ```
