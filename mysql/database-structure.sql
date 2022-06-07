@@ -56,7 +56,7 @@ INSERT INTO product_brands(product_brand_name)
 VALUES ('adidas'), ('nike'), ('the north face'), ('wrangler'), ('MISBHV'), ('yeezy');
 
 INSERT INTO products(product_name, product_desc,product_price, product_amount, product_category_id, product_brand_id)
-VALUES ('nike air force 1', 'immortal shoes', 250.00, 400 , 1, 2), ('yeezy boost 350''bone'' ', 'very comfy shoes', 800.00, 25, 1, 6);
+VALUES ('nike air force 1', 'immortal shoes', 249.99, 400 , 1, 2), ('yeezy boost 350 ''bone'' ', 'very comfy shoes', 799.99, 200, 1, 6);
 
 
 # PROCEDURES
@@ -77,7 +77,7 @@ BEGIN
     INSERT INTO products(product_name, product_desc, product_price, product_amount, product_category_id, product_brand_id)
     VALUES (product_name, product_desc, product_price, product_amount, product_category_id, product_brand_id);
 END $$
-# CALL createProduct('adidas forum low', '',350.00,50,1,6);
+# CALL createProduct('adidas forum low', '', 350.00, 50, 1, 6);
 
 DELIMITER $$
 CREATE OR REPLACE PROCEDURE viewOrders()
@@ -99,7 +99,7 @@ BEGIN
         UPDATE products SET products.product_amount = products.product_amount - order_ordered_amount WHERE products.product_id = product_id;
     COMMIT;
 END $$
-# CALL createOrder('2022-05-09', 1, 500, 5000, 'tommy shelby company', 1234567890, 1);
+# CALL createOrder('2022-05-09', 1, 500, 5000, 'Shelby Company Limited', 1234567890, 1);
 
 
 

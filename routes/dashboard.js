@@ -67,7 +67,35 @@ router.post("/orders", (req, res) => {
     customer_NIP,
   } = req.body;
 
-  // TODO -> input data validation!
+  if (
+    !(product_id && order_ordered_amount,
+    order_date,
+    customer_name,
+    customer_NIP)
+  ) {
+    req.flash("error", "please fill in all fields");
+    return res.status(400).redirect("/dashboard/orders");
+  }
+  if (parseInt(order_ordered_amount) < 1) {
+    req.flash("error", "ordered amount can'be lower than 1");
+    return res.status(400).redirect("/dashboard/orders");
+  }
+  if (new Date(order_date).getFullYear() < 2004) {
+    req.flash("error", "order date's year can't be lower than 2004");
+    return res.status(400).redirect("/dashboard/orders");
+  }
+  if (new Date(order_date).getFullYear() > 2500) {
+    req.flash("error", "order date's year can't be higher than 2500");
+    return res.status(400).redirect("/dashboard/orders");
+  }
+  if (customer_name.length < 3) {
+    req.flash("error", "customer name should contain at least 3 characters");
+    return res.status(400).redirect("/dashboard/orders");
+  }
+  if (customer_NIP.length != 10) {
+    req.flash("error", "customer NIP should be 10 characters long");
+    return res.status(400).redirect("/dashboard/orders");
+  }
 
   database.query(
     `SELECT product_price FROM products WHERE product_id = ${product_id};`,
