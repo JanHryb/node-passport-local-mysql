@@ -24,7 +24,7 @@ const verify = (email, password, done) => {
         }
         return done(null, false, { message: "password incorrect" });
       });
-    }
+    },
   );
 };
 

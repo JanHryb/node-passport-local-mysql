@@ -7,7 +7,7 @@ CREATE TABLE users  (user_id INT AUTO_INCREMENT,
                     user_first_name VARCHAR(50) NOT NULL,
                     user_last_name VARCHAR(50) NOT NULL,
                     user_email VARCHAR(50) NOT NULL,
-                    user_password VARCHAR(60) NOT NULL, /*VARCHAR shloud be set on 60(no more no less) characters because of bcrypt libary!*/ 
+                    user_password VARCHAR(60) NOT NULL, /*VARCHAR shloud be set on 60(no more no less) characters because of bcrypt libary!*/
                     PRIMARY KEY (user_id));
 
 CREATE TABLE product_categories (product_category_id INT AUTO_INCREMENT,
@@ -63,6 +63,7 @@ BEGIN
 	INNER JOIN product_brands ON products.product_brand_id = product_brands.product_brand_id
     ORDER BY product_id ASC ;
 END $$
+DELIMITER ;
 # CALL viewProducts();
 
 DELIMITER $$
@@ -71,6 +72,7 @@ BEGIN
     INSERT INTO products(product_name, product_desc, product_price, product_amount, product_category_id, product_brand_id)
     VALUES (product_name, product_desc, product_price, product_amount, product_category_id, product_brand_id);
 END $$
+DELIMITER ;
 # CALL createProduct('adidas forum low', '', 350.00, 50, 1, 6);
 
 DELIMITER $$
@@ -82,17 +84,25 @@ BEGIN
     INNER JOIN users ON orders.user_id = users.user_id
     ORDER BY orders.order_date DESC;
 END $$
+DELIMITER ;
 # CALL viewOrders();
 
 DELIMITER $$
 CREATE OR REPLACE PROCEDURE createOrder(order_date DATE, product_id INT, order_ordered_amount INT UNSIGNED, order_total_price DECIMAL(9,2) UNSIGNED, customer_name VARCHAR(50), customer_NIP INT(10), user_id INT)
 BEGIN
-    START TRANSACTION;
-        INSERT INTO orders(order_date, product_id, order_ordered_amount, order_total_price, customer_name, customer_NIP, user_id)
-        VALUES (order_date, product_id, order_ordered_amount, order_total_price, customer_name, customer_NIP, user_id);
-        UPDATE products SET products.product_amount = products.product_amount - order_ordered_amount WHERE products.product_id = product_id;
-    COMMIT;
+    DECLARE available_amount INT UNSIGNED;
+    SELECT product_amount INTO available_amount FROM products WHERE products.product_id = product_id;
+    IF order_ordered_amount > available_amount THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Not enough products in stock!';
+    ELSE
+        START TRANSACTION;
+            INSERT INTO orders(order_date, product_id, order_ordered_amount, order_total_price, customer_name, customer_NIP, user_id)
+            VALUES (order_date, product_id, order_ordered_amount, order_total_price, customer_name, customer_NIP, user_id);
+            UPDATE products SET products.product_amount = products.product_amount - order_ordered_amount WHERE products.product_id = product_id;
+        COMMIT;
+    END IF;
 END $$
+DELIMITER ;
 # CALL createOrder('2022-05-09', 1, 500, 5000, 'Shelby Company Limited', 1234567890, 1);
 
 

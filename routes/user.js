@@ -16,7 +16,7 @@ router.get("/", auth.isAuthenticated, (req, res) => {
 
       const user = result[0];
       return res.status(200).render("user/user", { user });
-    }
+    },
   );
 });
 
@@ -83,10 +83,10 @@ router.post("/register", (req, res) => {
             }
             req.flash("success", "you have been successfully registered");
             return res.status(201).redirect("/user/login");
-          }
+          },
         );
       });
-    }
+    },
   );
 });
 
@@ -104,7 +104,7 @@ router.post(
       req.session.cookie.maxAge = null; // cookie expires at end of session
     }
     return res.redirect("/user");
-  }
+  },
 );
 
 module.exports = router;

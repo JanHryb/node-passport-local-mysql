@@ -23,7 +23,7 @@ router.get("/orders", auth.isAuthenticated, (req, res) => {
         return res
           .status(200)
           .render("dashboard/orders", { viewResult, products });
-      }
+      },
     );
   });
 });
@@ -51,9 +51,9 @@ router.get("/products", auth.isAuthenticated, (req, res) => {
               productCategories,
               productBrands,
             });
-          }
+          },
         );
-      }
+      },
     );
   });
 });
@@ -68,10 +68,13 @@ router.post("/orders", (req, res) => {
   } = req.body;
 
   if (
-    !(product_id && order_ordered_amount,
-    order_date,
-    customer_name,
-    customer_NIP)
+    !(
+      product_id &&
+      order_ordered_amount &&
+      order_date &&
+      customer_name &&
+      customer_NIP
+    )
   ) {
     req.flash("error", "please fill in all fields");
     return res.status(400).redirect("/dashboard/orders");
@@ -107,19 +110,21 @@ router.post("/orders", (req, res) => {
         result[0].product_price * parseInt(order_ordered_amount);
       database.query(
         `CALL createOrder('${order_date}', ${parseInt(product_id)}, ${parseInt(
-          order_ordered_amount
+          order_ordered_amount,
         )}, ${order_total_price}, '${customer_name}', ${parseInt(
-          customer_NIP
+          customer_NIP,
         )}, ${req.user});`,
         (err, result) => {
           if (err) {
             console.error(err);
+            req.flash("error", err.sqlMessage);
+            return res.status(400).redirect("/dashboard/orders");
           }
           req.flash("success", "record has been added");
           return res.status(201).redirect("/dashboard/orders");
-        }
+        },
       );
-    }
+    },
   );
 });
 
@@ -164,9 +169,9 @@ router.post("/products", (req, res) => {
 
   database.query(
     `CALL createProduct('${product_name}', '${product_desc}', ${parseFloat(
-      product_price
+      product_price,
     )}, ${parseInt(product_amount)}, ${parseInt(
-      product_category_id
+      product_category_id,
     )}, ${parseInt(product_brand_id)});`,
     (err, result) => {
       if (err) {
@@ -174,7 +179,7 @@ router.post("/products", (req, res) => {
       }
       req.flash("success", "record has been added");
       return res.status(201).redirect("/dashboard/products");
-    }
+    },
   );
 });
 

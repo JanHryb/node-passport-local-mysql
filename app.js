@@ -27,7 +27,7 @@ app.use(
     }),
     resave: false,
     saveUninitialized: false,
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.authenticate("session"));
